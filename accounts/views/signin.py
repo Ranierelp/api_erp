@@ -6,21 +6,21 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class Signin(Base):
-    def post(self,request):
-        email  = request.data.get('email')
+    def post(self, request):
+        email = request.data.get('email')
         password = request.data.get('password')
-        
+
         user = Authentication.signin(self, email=email, password=password)
         
-        token = RefreshToken.for_user(user.id)
-        
+        token = RefreshToken.for_user(user)
+
         enterprise = self.get_enterprise_user(user.id)
-        
+
         serializer = UserSerializer(user)
-        
+
         return Response({
-            'user': serializer.data,
-            'enterprise': enterprise,
-            'refresh': token.access_token,
-            'access_token': token.access_token,
+            "user": serializer.data,
+            "enterprise": enterprise,
+            "refresh": str(token),
+            "access": str(token.access_token)
         })
