@@ -27,7 +27,7 @@ def check_permission(user, method, permission_to):
                 return True
             
 
-class EmployeePermission(permissions.BasePermission):
+class EmployeesPermission(permissions.BasePermission):
     message = 'O funcionario não tem permissão para acessar este recurso.'
     
     def has_permission(self, request, _view):
