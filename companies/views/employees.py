@@ -32,6 +32,7 @@ class Employees(Base):
         
         enterprise_id = self.get_enterprise_id(request.user.id)
         signup_user = Authentication.signup(
+            self,
             name=name,
             email=email,
             password=password,
